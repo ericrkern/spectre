@@ -1,5 +1,9 @@
 # Spectre Architecture
 
+![Spectre: set the phone down, learn the room, then flag what changes.](how-it-works.png)
+
+![Spectre session flow: sensors, acquisition, baseline, independent detectors, session log, and investigation screen.](architecture-summary.png)
+
 Spectre is an iPhone app for field investigation. It watches the phone’s sensors, learns a short baseline for the room, and flags physical readings that depart from that baseline. Those departures are **anomalies**: unusual magnetic fields, pressure shifts, sounds, motion, and similar signals. The app presents them as leads an investigator can review. It does not claim a sensor reading is proof of a supernatural event. Measurement stays separate from interpretation.
 
 A session is the unit of work. The investigator starts a session, the phone records synchronized sensor streams, the anomaly engine scores windows of those streams, and the session log keeps the hits with timestamps and raw context so they can be replayed later.
