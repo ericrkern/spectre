@@ -81,7 +81,7 @@ final class FileCaptureStore: CaptureStoring {
             self.fileURL = fileURL
         } else {
             let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            self.fileURL = directory.appendingPathComponent("spectre-captures.json")
+            self.fileURL = directory.appendingPathComponent("quispulsat-captures.json")
         }
     }
 
@@ -127,7 +127,7 @@ final class FileDetectionStore: DetectionStoring {
             self.fileURL = fileURL
         } else {
             let directory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            self.fileURL = directory.appendingPathComponent("spectre-detections.json")
+            self.fileURL = directory.appendingPathComponent("quispulsat-detections.json")
         }
     }
 

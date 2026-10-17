@@ -143,7 +143,7 @@ struct SpectrumMeter: View {
                 HStack(alignment: .bottom, spacing: 2) {
                     ForEach(shown.indices, id: \.self) { index in
                         Capsule()
-                            .fill(active ? SpectreColor.gold : SpectreColor.line)
+                            .fill(active ? QuisPulsatColor.gold : QuisPulsatColor.line)
                             .frame(height: max(2, geo.size.height * shown[index]))
                     }
                 }
@@ -158,7 +158,7 @@ struct SpectrumMeter: View {
                 Text(rangeEnd(first: false))
             }
             .font(.caption2.weight(.semibold).monospacedDigit())
-            .foregroundStyle(active ? SpectreColor.ink : SpectreColor.muted)
+            .foregroundStyle(active ? QuisPulsatColor.ink : QuisPulsatColor.muted)
         }
     }
 
@@ -186,20 +186,20 @@ struct NeedleDial: View {
             let stroke = min(8, max(2.5, span * 0.048))
             ZStack {
                 DialArc(fraction: 1)
-                    .stroke(SpectreColor.line, style: StrokeStyle(lineWidth: stroke, lineCap: .round))
+                    .stroke(QuisPulsatColor.line, style: StrokeStyle(lineWidth: stroke, lineCap: .round))
                 DialArc(fraction: fraction)
-                    .stroke(active ? SpectreColor.gold : SpectreColor.muted, style: StrokeStyle(lineWidth: stroke, lineCap: .round))
+                    .stroke(active ? QuisPulsatColor.gold : QuisPulsatColor.muted, style: StrokeStyle(lineWidth: stroke, lineCap: .round))
                 DialTicks()
-                    .stroke(SpectreColor.muted, lineWidth: max(1, stroke * 0.22))
+                    .stroke(QuisPulsatColor.muted, lineWidth: max(1, stroke * 0.22))
                 DialNeedle(fraction: fraction)
-                    .stroke(active ? SpectreColor.ink : SpectreColor.muted, style: StrokeStyle(lineWidth: max(1.5, stroke * 0.36), lineCap: .round))
+                    .stroke(active ? QuisPulsatColor.ink : QuisPulsatColor.muted, style: StrokeStyle(lineWidth: max(1.5, stroke * 0.36), lineCap: .round))
                 Circle()
-                    .fill(active ? SpectreColor.gold : SpectreColor.muted)
+                    .fill(active ? QuisPulsatColor.gold : QuisPulsatColor.muted)
                     .frame(width: max(4, span * 0.05), height: max(4, span * 0.05))
                 Text(label)
                     .font(span > 200 ? .title2.weight(.semibold) : .caption2.weight(.semibold))
                     .monospacedDigit()
-                    .foregroundStyle(active ? SpectreColor.ink : SpectreColor.muted)
+                    .foregroundStyle(active ? QuisPulsatColor.ink : QuisPulsatColor.muted)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .offset(y: span * 0.24)
@@ -295,11 +295,11 @@ struct CompassDial: View {
             let span = min(geo.size.width, geo.size.height)
             ZStack {
                 Circle()
-                    .stroke(SpectreColor.line, lineWidth: min(8, max(2.5, span * 0.048)))
+                    .stroke(QuisPulsatColor.line, lineWidth: min(8, max(2.5, span * 0.048)))
                 ForEach(cardinalMarks, id: \.label) { mark in
                     Text(mark.label)
                         .font(.system(size: max(8, span * 0.08), weight: .bold))
-                        .foregroundStyle(mark.label == "N" ? SpectreColor.gold : SpectreColor.muted)
+                        .foregroundStyle(mark.label == "N" ? QuisPulsatColor.gold : QuisPulsatColor.muted)
                         .rotationEffect(.degrees(-mark.angle))
                         .offset(y: -span * 0.36)
                         .rotationEffect(.degrees(mark.angle))
@@ -309,7 +309,7 @@ struct CompassDial: View {
                     .rotationEffect(.degrees(heading ?? 0))
                 Text(label)
                     .font(.system(size: max(8, span * 0.09), weight: .semibold).monospacedDigit())
-                    .foregroundStyle(active ? SpectreColor.ink : SpectreColor.muted)
+                    .foregroundStyle(active ? QuisPulsatColor.ink : QuisPulsatColor.muted)
                     .offset(y: span * 0.18)
             }
         }
@@ -336,8 +336,8 @@ private struct CompassNeedle: View {
             south.addLine(to: CGPoint(x: 0, y: size.height / 2))
             south.addLine(to: CGPoint(x: size.width / 2, y: size.height / 2))
             south.closeSubpath()
-            context.fill(north, with: .color(active ? SpectreColor.gold : SpectreColor.muted))
-            context.fill(south, with: .color(SpectreColor.muted))
+            context.fill(north, with: .color(active ? QuisPulsatColor.gold : QuisPulsatColor.muted))
+            context.fill(south, with: .color(QuisPulsatColor.muted))
         }
     }
 }
@@ -364,34 +364,34 @@ struct SurveyMeter: View {
                         .onTapGesture(perform: onBackgroundTap)
                     ForEach([1.0, 0.66, 0.33], id: \.self) { fraction in
                         Circle()
-                            .stroke(SpectreColor.line, lineWidth: 1)
+                            .stroke(QuisPulsatColor.line, lineWidth: 1)
                             .frame(width: radius * 2 * fraction, height: radius * 2 * fraction)
                             .position(center)
                     }
                     Capsule()
-                        .fill(SpectreColor.gold)
+                        .fill(QuisPulsatColor.gold)
                         .frame(width: compact ? 2 : 3, height: compact ? 6 : 10)
                         .position(x: center.x, y: center.y - radius)
                     ForEach(picture.walls.indices, id: \.self) { index in
-                        outline(picture.walls[index], color: SpectreColor.ink, width: compact ? 1.5 : 2.5, radius: radius, center: center)
+                        outline(picture.walls[index], color: QuisPulsatColor.ink, width: compact ? 1.5 : 2.5, radius: radius, center: center)
                     }
                     ForEach(picture.furnishings.indices, id: \.self) { index in
-                        outline(picture.furnishings[index], color: SpectreColor.gold, width: compact ? 1.5 : 3, radius: radius, center: center)
+                        outline(picture.furnishings[index], color: QuisPulsatColor.gold, width: compact ? 1.5 : 3, radius: radius, center: center)
                     }
                 }
             }
             .frame(maxHeight: compact ? .infinity : 190)
             if !compact {
                 HStack(spacing: 12) {
-                    legendSwatch(SpectreColor.ink, "Wall")
-                    legendSwatch(SpectreColor.gold, "Near")
+                    legendSwatch(QuisPulsatColor.ink, "Wall")
+                    legendSwatch(QuisPulsatColor.gold, "Near")
                 }
                 Button {
                     showDetail = true
                 } label: {
                     Text(picture.dot?.distanceLabel ?? "Clear")
                         .font(.caption.weight(.semibold).monospacedDigit())
-                        .foregroundStyle(SpectreColor.ink)
+                        .foregroundStyle(QuisPulsatColor.ink)
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("survey-dot")
@@ -408,7 +408,7 @@ struct SurveyMeter: View {
             Circle().fill(color).frame(width: 8, height: 8)
             Text(title)
                 .font(.caption2)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
         }
     }
 
@@ -443,38 +443,38 @@ struct SurveyDetail: View {
             HStack {
                 Text("Combined nearby")
                     .font(.headline)
-                    .foregroundStyle(SpectreColor.ink)
+                    .foregroundStyle(QuisPulsatColor.ink)
                 Spacer()
                 Button("Close") { dismiss() }
                     .font(.body.weight(.semibold))
-                    .foregroundStyle(SpectreColor.gold)
+                    .foregroundStyle(QuisPulsatColor.gold)
             }
             if let dot = picture.dot {
                 Text(dot.distanceLabel)
                     .font(.title3.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(SpectreColor.ink)
+                    .foregroundStyle(QuisPulsatColor.ink)
                 Text(dot.directionLabel)
                     .font(.body)
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
             } else {
                 Text("Nothing in range")
                     .font(.title3.weight(.semibold))
-                    .foregroundStyle(SpectreColor.ink)
+                    .foregroundStyle(QuisPulsatColor.ink)
             }
             ForEach(picture.lines, id: \.self) { line in
                 Text(line)
                     .font(.body)
-                    .foregroundStyle(SpectreColor.ink)
+                    .foregroundStyle(QuisPulsatColor.ink)
             }
             Text("Walls are the far depth in front of the phone. Near surfaces are closer than that wall. Wi-Fi is the network this phone has joined.")
                 .font(.footnote)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(SpectreColor.background)
+        .background(QuisPulsatColor.background)
         .presentationDetents([.medium])
         .presentationDragIndicator(.visible)
         .accessibilityIdentifier("survey-detail")
@@ -510,18 +510,18 @@ struct NearbyDevicesMeter: View {
                             Circle().fill(source.tint).frame(width: 8, height: 8)
                             Text(source.title)
                                 .font(.caption2)
-                                .foregroundStyle(SpectreColor.muted)
+                                .foregroundStyle(QuisPulsatColor.muted)
                                 .lineLimit(1)
                         }
                     }
                 }
                 Text(NearbyScan.rangeLabel(feet: rangeFeet))
                     .font(.caption.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(SpectreColor.ink)
+                    .foregroundStyle(QuisPulsatColor.ink)
                 if let onScanTag {
                     Button("Read NFC tag", action: onScanTag)
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(SpectreColor.gold)
+                        .foregroundStyle(QuisPulsatColor.gold)
                         .accessibilityIdentifier("nearby-scan-tag")
                 }
             }
@@ -557,16 +557,16 @@ struct NearbyRadar: View {
                     .onTapGesture(perform: onBackgroundTap)
                 ForEach([1.0, 0.66, 0.33], id: \.self) { fraction in
                     Circle()
-                        .stroke(SpectreColor.line, lineWidth: fraction == 1 ? (compact ? 1 : 1.5) : 1)
+                        .stroke(QuisPulsatColor.line, lineWidth: fraction == 1 ? (compact ? 1 : 1.5) : 1)
                         .frame(width: radius * 2 * fraction, height: radius * 2 * fraction)
                         .position(center)
                 }
                 Capsule()
-                    .fill(SpectreColor.gold)
+                    .fill(QuisPulsatColor.gold)
                     .frame(width: compact ? 2 : 3, height: compact ? 6 : 10)
                     .position(x: center.x, y: center.y - radius)
                 Circle()
-                    .fill(SpectreColor.gold)
+                    .fill(QuisPulsatColor.gold)
                     .frame(width: compact ? 3 : 5, height: compact ? 3 : 5)
                     .position(center)
                 ForEach(unmeasured) { sighting in
@@ -643,15 +643,15 @@ struct NearbyDetail: View {
                 Circle().fill(sighting.source.tint).frame(width: 16, height: 16)
                 Text(sighting.source.title)
                     .font(.headline)
-                    .foregroundStyle(SpectreColor.ink)
+                    .foregroundStyle(QuisPulsatColor.ink)
                 Spacer()
                 Button("Close") { dismiss() }
                     .font(.body.weight(.semibold))
-                    .foregroundStyle(SpectreColor.gold)
+                    .foregroundStyle(QuisPulsatColor.gold)
             }
             Text(sighting.name)
                 .font(.title3.weight(.semibold))
-                .foregroundStyle(SpectreColor.ink)
+                .foregroundStyle(QuisPulsatColor.ink)
             detailRow("Distance", sighting.distanceLabel)
             detailRow("Direction", sighting.directionLabel)
             detailRow("Signal", sighting.signal)
@@ -661,13 +661,13 @@ struct NearbyDetail: View {
             detailRow("Seen", sighting.seenAt.formatted(date: .omitted, time: .standard))
             Text(sighting.source.rangeNote)
                 .font(.footnote)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
         .padding(24)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(SpectreColor.background)
+        .background(QuisPulsatColor.background)
         .presentationDetents([.medium])
         .presentationDragIndicator(.visible)
         .accessibilityIdentifier("nearby-detail")
@@ -677,10 +677,10 @@ struct NearbyDetail: View {
         VStack(alignment: .leading, spacing: 2) {
             Text(title)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
             Text(value)
                 .font(.body.monospacedDigit())
-                .foregroundStyle(SpectreColor.ink)
+                .foregroundStyle(QuisPulsatColor.ink)
                 .fixedSize(horizontal: false, vertical: true)
         }
     }
@@ -706,19 +706,19 @@ struct RadarDial: View {
         GeometryReader { geo in
             let span = min(geo.size.width, geo.size.height)
             ZStack {
-                Circle().stroke(SpectreColor.line, lineWidth: min(8, max(2.5, span * 0.048)))
-                Circle().stroke(SpectreColor.line, lineWidth: 1).padding(span * 0.15)
-                Circle().stroke(SpectreColor.line, lineWidth: 1).padding(span * 0.27)
+                Circle().stroke(QuisPulsatColor.line, lineWidth: min(8, max(2.5, span * 0.048)))
+                Circle().stroke(QuisPulsatColor.line, lineWidth: 1).padding(span * 0.15)
+                Circle().stroke(QuisPulsatColor.line, lineWidth: 1).padding(span * 0.27)
                 ForEach(0..<min(count, 12), id: \.self) { index in
                     Circle()
-                        .fill(active ? SpectreColor.gold : SpectreColor.muted)
+                        .fill(active ? QuisPulsatColor.gold : QuisPulsatColor.muted)
                         .frame(width: max(4, span * 0.055), height: max(4, span * 0.055))
                         .offset(y: -span * 0.31 + CGFloat(index % 3) * span * 0.09)
                         .rotationEffect(.degrees(Double(index) / Double(max(min(count, 12), 1)) * 360))
                 }
                 Text(label)
                     .font(.system(size: max(8, span * 0.1), weight: .semibold).monospacedDigit())
-                    .foregroundStyle(active ? SpectreColor.ink : SpectreColor.muted)
+                    .foregroundStyle(active ? QuisPulsatColor.ink : QuisPulsatColor.muted)
             }
         }
         .animation(.easeOut(duration: 0.25), value: count)
@@ -747,15 +747,15 @@ struct LocationDial: View {
                 GeometryReader { geo in
                     let span = min(geo.size.width, geo.size.height)
                     ZStack {
-                        Circle().stroke(SpectreColor.line, lineWidth: min(8, max(2.5, span * 0.048)))
+                        Circle().stroke(QuisPulsatColor.line, lineWidth: min(8, max(2.5, span * 0.048)))
                         Rectangle()
-                            .fill(SpectreColor.muted)
+                            .fill(QuisPulsatColor.muted)
                             .frame(width: 1, height: span * 0.48)
                         Rectangle()
-                            .fill(SpectreColor.muted)
+                            .fill(QuisPulsatColor.muted)
                             .frame(width: span * 0.48, height: 1)
                         Circle()
-                            .stroke(SpectreColor.gold.opacity(active ? 1 : 0.4), lineWidth: 1.5)
+                            .stroke(QuisPulsatColor.gold.opacity(active ? 1 : 0.4), lineWidth: 1.5)
                             .frame(width: span * 0.2, height: span * 0.2)
                     }
                 }
@@ -764,7 +764,7 @@ struct LocationDial: View {
                 GeometryReader { geo in
                     Text(label)
                         .font(.system(size: max(8, min(geo.size.width, geo.size.height) * 0.1), weight: .semibold).monospacedDigit())
-                        .foregroundStyle(SpectreColor.muted)
+                        .foregroundStyle(QuisPulsatColor.muted)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .offset(y: min(geo.size.width, geo.size.height) * 0.24)
                 }

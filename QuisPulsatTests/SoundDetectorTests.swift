@@ -1,7 +1,7 @@
 import AVFoundation
 import Foundation
 import Testing
-@testable import Spectre
+@testable import QuisPulsat
 
 private let rate = 8_000.0
 private let count = 512

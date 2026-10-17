@@ -4,7 +4,7 @@ import CoreMotion
 import AVFoundation
 import Foundation
 import Testing
-@testable import Spectre
+@testable import QuisPulsat
 
 @Test func elapsedFormatShowsMinutesSecondsAndTenths() {
     #expect(ElapsedTimeFormat.string(for: .seconds(0)) == "0:00.0")

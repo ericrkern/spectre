@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E1A000000000000000000001"
-               BuildableName = "Spectre.app"
-               BlueprintName = "Spectre"
-               ReferencedContainer = "container:Spectre.xcodeproj">
+               BuildableName = "QuisPulsat.app"
+               BlueprintName = "QuisPulsat"
+               ReferencedContainer = "container:QuisPulsat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E1B000000000000000000001"
-               BuildableName = "SpectreTests.xctest"
-               BlueprintName = "SpectreTests"
-               ReferencedContainer = "container:Spectre.xcodeproj">
+               BuildableName = "QuisPulsatTests.xctest"
+               BlueprintName = "QuisPulsatTests"
+               ReferencedContainer = "container:QuisPulsat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E1C000000000000000000001"
-               BuildableName = "SpectreUITests.xctest"
-               BlueprintName = "SpectreUITests"
-               ReferencedContainer = "container:Spectre.xcodeproj">
+               BuildableName = "QuisPulsatUITests.xctest"
+               BlueprintName = "QuisPulsatUITests"
+               ReferencedContainer = "container:QuisPulsat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E1B000000000000000000001"
-               BuildableName = "SpectreTests.xctest"
-               BlueprintName = "SpectreTests"
-               ReferencedContainer = "container:Spectre.xcodeproj">
+               BuildableName = "QuisPulsatTests.xctest"
+               BlueprintName = "QuisPulsatTests"
+               ReferencedContainer = "container:QuisPulsat.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -71,9 +71,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E1C000000000000000000001"
-               BuildableName = "SpectreUITests.xctest"
-               BlueprintName = "SpectreUITests"
-               ReferencedContainer = "container:Spectre.xcodeproj">
+               BuildableName = "QuisPulsatUITests.xctest"
+               BlueprintName = "QuisPulsatUITests"
+               ReferencedContainer = "container:QuisPulsat.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -93,9 +93,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E1A000000000000000000001"
-            BuildableName = "Spectre.app"
-            BlueprintName = "Spectre"
-            ReferencedContainer = "container:Spectre.xcodeproj">
+            BuildableName = "QuisPulsat.app"
+            BlueprintName = "QuisPulsat"
+            ReferencedContainer = "container:QuisPulsat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -110,9 +110,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E1A000000000000000000001"
-            BuildableName = "Spectre.app"
-            BlueprintName = "Spectre"
-            ReferencedContainer = "container:Spectre.xcodeproj">
+            BuildableName = "QuisPulsat.app"
+            BlueprintName = "QuisPulsat"
+            ReferencedContainer = "container:QuisPulsat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

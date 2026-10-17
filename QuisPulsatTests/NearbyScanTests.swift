@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import Spectre
+@testable import QuisPulsat
 
 @Test func aStrongBluetoothSignalIsInsideOneHundredFeetAndAWeakOneIsNot() {
     let close = NearbyScan.bluetoothFeet(rssi: -59)

@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct SpectreApp: App {
+struct QuisPulsatApp: App {
     var body: some Scene {
         WindowGroup {
             SessionScreen()

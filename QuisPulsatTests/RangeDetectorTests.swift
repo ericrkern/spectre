@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import Spectre
+@testable import QuisPulsat
 
 private func openRoom(depth: Double = 2, confidence: Int = 2) -> [DepthCell] {
     Array(repeating: DepthCell(depth: depth, confidence: confidence), count: DepthDetector.columns * DepthDetector.rows)

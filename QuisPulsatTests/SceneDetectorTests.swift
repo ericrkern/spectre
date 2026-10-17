@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import Spectre
+@testable import QuisPulsat
 
 private func heading(_ degrees: Double, accuracy: Double, at timestamp: TimeInterval) -> HeadingFrame {
     HeadingFrame(timestamp: timestamp, magneticHeading: degrees, accuracy: accuracy)

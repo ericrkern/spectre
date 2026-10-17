@@ -12,37 +12,37 @@
 			containerPortal = E1A00000000000000000000A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E1A000000000000000000001;
-			remoteInfo = Spectre;
+			remoteInfo = QuisPulsat;
 		};
 		E1C00000000000000000000A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E1A00000000000000000000A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E1A000000000000000000001;
-			remoteInfo = Spectre;
+			remoteInfo = QuisPulsat;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E1A000000000000000000002 /* Spectre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spectre.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1B000000000000000000002 /* SpectreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E1C000000000000000000002 /* SpectreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1A000000000000000000002 /* QuisPulsat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuisPulsat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1B000000000000000000002 /* QuisPulsatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuisPulsatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1C000000000000000000002 /* QuisPulsatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuisPulsatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E1A000000000000000000003 /* Spectre */ = {
+		E1A000000000000000000003 /* QuisPulsat */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Spectre;
+			path = QuisPulsat;
 			sourceTree = "<group>";
 		};
-		E1B000000000000000000003 /* SpectreTests */ = {
+		E1B000000000000000000003 /* QuisPulsatTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SpectreTests;
+			path = QuisPulsatTests;
 			sourceTree = "<group>";
 		};
-		E1C000000000000000000003 /* SpectreUITests */ = {
+		E1C000000000000000000003 /* QuisPulsatUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SpectreUITests;
+			path = QuisPulsatUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +75,9 @@
 		E1A000000000000000000005 = {
 			isa = PBXGroup;
 			children = (
-				E1A000000000000000000003 /* Spectre */,
-				E1B000000000000000000003 /* SpectreTests */,
-				E1C000000000000000000003 /* SpectreUITests */,
+				E1A000000000000000000003 /* QuisPulsat */,
+				E1B000000000000000000003 /* QuisPulsatTests */,
+				E1C000000000000000000003 /* QuisPulsatUITests */,
 				E1A000000000000000000006 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,9 +85,9 @@
 		E1A000000000000000000006 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E1A000000000000000000002 /* Spectre.app */,
-				E1B000000000000000000002 /* SpectreTests.xctest */,
-				E1C000000000000000000002 /* SpectreUITests.xctest */,
+				E1A000000000000000000002 /* QuisPulsat.app */,
+				E1B000000000000000000002 /* QuisPulsatTests.xctest */,
+				E1C000000000000000000002 /* QuisPulsatUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E1A000000000000000000001 /* Spectre */ = {
+		E1A000000000000000000001 /* QuisPulsat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1A000000000000000000007 /* Build configuration list for PBXNativeTarget "Spectre" */;
+			buildConfigurationList = E1A000000000000000000007 /* Build configuration list for PBXNativeTarget "QuisPulsat" */;
 			buildPhases = (
 				E1A000000000000000000008 /* Sources */,
 				E1A000000000000000000004 /* Frameworks */,
@@ -108,16 +108,16 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E1A000000000000000000003 /* Spectre */,
+				E1A000000000000000000003 /* QuisPulsat */,
 			);
-			name = Spectre;
-			productName = Spectre;
-			productReference = E1A000000000000000000002 /* Spectre.app */;
+			name = QuisPulsat;
+			productName = QuisPulsat;
+			productReference = E1A000000000000000000002 /* QuisPulsat.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E1B000000000000000000001 /* SpectreTests */ = {
+		E1B000000000000000000001 /* QuisPulsatTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1B000000000000000000007 /* Build configuration list for PBXNativeTarget "SpectreTests" */;
+			buildConfigurationList = E1B000000000000000000007 /* Build configuration list for PBXNativeTarget "QuisPulsatTests" */;
 			buildPhases = (
 				E1B000000000000000000005 /* Sources */,
 				E1B000000000000000000004 /* Frameworks */,
@@ -129,16 +129,16 @@
 				E1B00000000000000000000B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				E1B000000000000000000003 /* SpectreTests */,
+				E1B000000000000000000003 /* QuisPulsatTests */,
 			);
-			name = SpectreTests;
-			productName = SpectreTests;
-			productReference = E1B000000000000000000002 /* SpectreTests.xctest */;
+			name = QuisPulsatTests;
+			productName = QuisPulsatTests;
+			productReference = E1B000000000000000000002 /* QuisPulsatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E1C000000000000000000001 /* SpectreUITests */ = {
+		E1C000000000000000000001 /* QuisPulsatUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E1C000000000000000000007 /* Build configuration list for PBXNativeTarget "SpectreUITests" */;
+			buildConfigurationList = E1C000000000000000000007 /* Build configuration list for PBXNativeTarget "QuisPulsatUITests" */;
 			buildPhases = (
 				E1C000000000000000000005 /* Sources */,
 				E1C000000000000000000004 /* Frameworks */,
@@ -150,11 +150,11 @@
 				E1C00000000000000000000B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				E1C000000000000000000003 /* SpectreUITests */,
+				E1C000000000000000000003 /* QuisPulsatUITests */,
 			);
-			name = SpectreUITests;
-			productName = SpectreUITests;
-			productReference = E1C000000000000000000002 /* SpectreUITests.xctest */;
+			name = QuisPulsatUITests;
+			productName = QuisPulsatUITests;
+			productReference = E1C000000000000000000002 /* QuisPulsatUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -179,7 +179,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E1A00000000000000000000B /* Build configuration list for PBXProject "Spectre" */;
+			buildConfigurationList = E1A00000000000000000000B /* Build configuration list for PBXProject "QuisPulsat" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -193,9 +193,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E1A000000000000000000001 /* Spectre */,
-				E1B000000000000000000001 /* SpectreTests */,
-				E1C000000000000000000001 /* SpectreUITests */,
+				E1A000000000000000000001 /* QuisPulsat */,
+				E1B000000000000000000001 /* QuisPulsatTests */,
+				E1C000000000000000000001 /* QuisPulsatUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,12 +251,12 @@
 /* Begin PBXTargetDependency section */
 		E1B00000000000000000000B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E1A000000000000000000001 /* Spectre */;
+			target = E1A000000000000000000001 /* QuisPulsat */;
 			targetProxy = E1B00000000000000000000A /* PBXContainerItemProxy */;
 		};
 		E1C00000000000000000000B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E1A000000000000000000001 /* Spectre */;
+			target = E1A000000000000000000001 /* QuisPulsat */;
 			targetProxy = E1C00000000000000000000A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -383,7 +383,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.spectre;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.quispulsat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -423,7 +423,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.spectre;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.quispulsat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -443,14 +443,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.spectre.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.quispulsat.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spectre.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Spectre";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuisPulsat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuisPulsat";
 			};
 			name = Debug;
 		};
@@ -464,14 +464,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.spectre.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.quispulsat.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spectre.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Spectre";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QuisPulsat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QuisPulsat";
 			};
 			name = Release;
 		};
@@ -484,14 +484,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.spectre.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.quispulsat.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = Spectre;
+				TEST_TARGET_NAME = QuisPulsat;
 			};
 			name = Debug;
 		};
@@ -504,21 +504,21 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.spectre.uitests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nightranger.quispulsat.uitests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = Spectre;
+				TEST_TARGET_NAME = QuisPulsat;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E1A000000000000000000007 /* Build configuration list for PBXNativeTarget "Spectre" */ = {
+		E1A000000000000000000007 /* Build configuration list for PBXNativeTarget "QuisPulsat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1A00000000000000000000E /* Debug */,
@@ -527,7 +527,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1A00000000000000000000B /* Build configuration list for PBXProject "Spectre" */ = {
+		E1A00000000000000000000B /* Build configuration list for PBXProject "QuisPulsat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1A00000000000000000000C /* Debug */,
@@ -536,7 +536,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1B000000000000000000007 /* Build configuration list for PBXNativeTarget "SpectreTests" */ = {
+		E1B000000000000000000007 /* Build configuration list for PBXNativeTarget "QuisPulsatTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1B000000000000000000008 /* Debug */,
@@ -545,7 +545,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E1C000000000000000000007 /* Build configuration list for PBXNativeTarget "SpectreUITests" */ = {
+		E1C000000000000000000007 /* Build configuration list for PBXNativeTarget "QuisPulsatUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1C000000000000000000008 /* Debug */,

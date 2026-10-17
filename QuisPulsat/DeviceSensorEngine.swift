@@ -891,7 +891,7 @@ private final class VisionFeed: NSObject, AVCaptureVideoDataOutputSampleBufferDe
     private let onDepth: @MainActor ([DepthCell]) -> Void
     private let session = AVCaptureSession()
     private let depthSession = ARSession()
-    private let queue = DispatchQueue(label: "spectre.camera")
+    private let queue = DispatchQueue(label: "quispulsat.camera")
     private var camera: AVCaptureDevice?
     private var lastSample = Date.distantPast
     private var runningCapture = false

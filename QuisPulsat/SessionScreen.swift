@@ -18,7 +18,7 @@ struct SessionScreen: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                SpectreColor.background.ignoresSafeArea()
+                QuisPulsatColor.background.ignoresSafeArea()
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
                         header
@@ -39,7 +39,7 @@ struct SessionScreen: View {
             }
         }
         .preferredColorScheme(.dark)
-        .tint(SpectreColor.gold)
+        .tint(QuisPulsatColor.gold)
         .onAppear {
             controller.activate()
         }
@@ -61,7 +61,7 @@ struct SessionScreen: View {
                 .clipShape(RoundedRectangle(cornerRadius: 18))
                 .overlay(
                     RoundedRectangle(cornerRadius: 18)
-                        .stroke(SpectreColor.gold.opacity(0.55), lineWidth: 1)
+                        .stroke(QuisPulsatColor.gold.opacity(0.55), lineWidth: 1)
                 )
                 .frame(maxWidth: .infinity, alignment: .center)
                 .accessibilityLabel("Quis Pulsat")
@@ -69,18 +69,18 @@ struct SessionScreen: View {
                 Text(controller.elapsedLabel(at: ContinuousClock().now))
                     .font(.system(size: 44, weight: .medium, design: .rounded))
                     .monospacedDigit()
-                    .foregroundStyle(SpectreColor.gold)
+                    .foregroundStyle(QuisPulsatColor.gold)
                     .accessibilityIdentifier("session-clock")
             }
             Text("Sensors stay live while Quis Pulsat is open. Capture saves what they show right now.")
                 .font(.subheadline)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
                 .fixedSize(horizontal: false, vertical: true)
             HStack(alignment: .center, spacing: 16) {
                 VStack(spacing: 4) {
                     Text("Sensitivity")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(SpectreColor.muted)
+                        .foregroundStyle(QuisPulsatColor.muted)
                     SensitivityDial(level: $controller.sensitivityLevel)
                         .frame(width: 132, height: 132)
                 }
@@ -96,8 +96,8 @@ struct SessionScreen: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(16)
-                    .background(SpectreColor.gold)
-                    .foregroundStyle(SpectreColor.background)
+                    .background(QuisPulsatColor.gold)
+                    .foregroundStyle(QuisPulsatColor.background)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
                 .buttonStyle(.plain)
@@ -112,7 +112,7 @@ struct SessionScreen: View {
                 .textFieldStyle(.plain)
                 .font(.title3)
                 .padding(16)
-                .background(SpectreColor.card)
+                .background(QuisPulsatColor.card)
                 .clipShape(RoundedRectangle(cornerRadius: 14))
                 .accessibilityIdentifier("place-name")
                 .autocorrectionDisabled()
@@ -120,7 +120,7 @@ struct SessionScreen: View {
             Button("Capture and save") {
                 controller.capture()
             }
-            .buttonStyle(SpectreButtonStyle())
+            .buttonStyle(QuisPulsatButtonStyle())
             .disabled(!controller.canCapture)
             .accessibilityIdentifier("capture-save")
         }
@@ -156,19 +156,19 @@ struct SessionScreen: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Saved")
                 .font(.headline)
-                .foregroundStyle(SpectreColor.ink)
+                .foregroundStyle(QuisPulsatColor.ink)
             VStack(spacing: 0) {
                 ForEach(controller.captures) { capture in
                     VStack(alignment: .leading, spacing: 4) {
                         Text(capture.placeName)
                             .font(.body.weight(.medium))
-                            .foregroundStyle(SpectreColor.ink)
+                            .foregroundStyle(QuisPulsatColor.ink)
                         Text("\(capture.elapsed) · \(capture.savedAt.formatted(date: .abbreviated, time: .shortened))")
                             .font(.subheadline)
-                            .foregroundStyle(SpectreColor.muted)
+                            .foregroundStyle(QuisPulsatColor.muted)
                         Text(capture.summary)
                             .font(.subheadline)
-                            .foregroundStyle(SpectreColor.gold)
+                            .foregroundStyle(QuisPulsatColor.gold)
                             .lineLimit(2)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -176,11 +176,11 @@ struct SessionScreen: View {
                     .accessibilityElement(children: .combine)
                     .accessibilityIdentifier("saved-\(capture.placeName)")
                     if capture.id != controller.captures.last?.id {
-                        Divider().overlay(SpectreColor.line)
+                        Divider().overlay(QuisPulsatColor.line)
                     }
                 }
             }
-            .background(SpectreColor.card)
+            .background(QuisPulsatColor.card)
             .clipShape(RoundedRectangle(cornerRadius: 16))
         }
     }
@@ -191,7 +191,7 @@ private struct DetectionsScreen: View {
 
     var body: some View {
         ZStack {
-            SpectreColor.background.ignoresSafeArea()
+            QuisPulsatColor.background.ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     leadList
@@ -208,45 +208,45 @@ private struct DetectionsScreen: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Leads")
                 .font(.headline)
-                .foregroundStyle(SpectreColor.ink)
+                .foregroundStyle(QuisPulsatColor.ink)
             Text(controller.watchStatus)
                 .font(.subheadline)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityIdentifier("lead-status")
             Text(controller.sensitivity.summary)
                 .font(.caption)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityIdentifier("detection-thresholds")
             if !controller.soundStatus.isEmpty {
                 Text(controller.soundStatus)
                     .font(.subheadline)
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
                     .accessibilityIdentifier("sound-status")
             }
             if !controller.headingStatus.isEmpty {
                 Text(controller.headingStatus)
                     .font(.subheadline)
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
                     .accessibilityIdentifier("heading-status")
             }
             if !controller.brightnessStatus.isEmpty {
                 Text(controller.brightnessStatus)
                     .font(.subheadline)
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
                     .accessibilityIdentifier("brightness-status")
             }
             if !controller.depthStatus.isEmpty {
                 Text(controller.depthStatus)
                     .font(.subheadline)
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
                     .accessibilityIdentifier("depth-status")
             }
             if !controller.radioStatus.isEmpty {
                 Text(controller.radioStatus)
                     .font(.subheadline)
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
                     .accessibilityIdentifier("radio-status")
             }
             if let detection = controller.announced {
@@ -258,7 +258,7 @@ private struct DetectionsScreen: View {
                         if group.sameMoment {
                             Text("Same moment")
                                 .font(.caption.weight(.semibold))
-                                .foregroundStyle(SpectreColor.gold)
+                                .foregroundStyle(QuisPulsatColor.gold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 16)
                                 .padding(.top, 12)
@@ -267,12 +267,12 @@ private struct DetectionsScreen: View {
                         ForEach(group.detections) { detection in
                             detectionRow(detection)
                             if detection.id != controller.leadGroups.last?.detections.last?.id {
-                                Divider().overlay(SpectreColor.line)
+                                Divider().overlay(QuisPulsatColor.line)
                             }
                         }
                     }
                 }
-                .background(SpectreColor.card)
+                .background(QuisPulsatColor.card)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             }
         }
@@ -282,20 +282,20 @@ private struct DetectionsScreen: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(detection.title)
                 .font(.body.weight(.medium))
-                .foregroundStyle(SpectreColor.ink)
+                .foregroundStyle(QuisPulsatColor.ink)
             Text("\(detection.feature) · \(detection.magnitudeLabel)")
                 .font(.subheadline)
-                .foregroundStyle(SpectreColor.gold)
+                .foregroundStyle(QuisPulsatColor.gold)
             Text("Threshold \(detection.thresholdLabel)")
                 .font(.subheadline)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
             Text("\(detection.placeName) · \(detection.elapsed)")
                 .font(.caption)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
             if !detection.sampleLabel.isEmpty {
                 Text("Window \(detection.sampleLabel)")
                     .font(.caption.monospacedDigit())
-                    .foregroundStyle(SpectreColor.muted)
+                    .foregroundStyle(QuisPulsatColor.muted)
                     .lineLimit(3)
             }
             if detection.clipWAV != nil {
@@ -305,10 +305,10 @@ private struct DetectionsScreen: View {
                     }
                 }
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(SpectreColor.background)
+                .foregroundStyle(QuisPulsatColor.background)
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
-                .background(SpectreColor.gold)
+                .background(QuisPulsatColor.gold)
                 .clipShape(Capsule())
                 .padding(.top, 6)
                 .accessibilityIdentifier("play-clip")
@@ -324,28 +324,28 @@ private struct DetectionsScreen: View {
         VStack(alignment: .leading, spacing: 6) {
             Text(controller.announcedCount > 1 ? "Detected \(controller.announcedCount)" : "Detected")
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(SpectreColor.background)
+                .foregroundStyle(QuisPulsatColor.background)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(SpectreColor.gold)
+                .background(QuisPulsatColor.gold)
                 .clipShape(Capsule())
             Text(detection.title)
                 .font(.title3.weight(.semibold))
-                .foregroundStyle(SpectreColor.ink)
+                .foregroundStyle(QuisPulsatColor.ink)
             Text(detection.magnitudeLabel)
                 .font(.system(size: 36, weight: .medium, design: .rounded))
                 .monospacedDigit()
-                .foregroundStyle(SpectreColor.gold)
+                .foregroundStyle(QuisPulsatColor.gold)
             Text("\(detection.feature) crossed \(detection.thresholdLabel)")
                 .font(.subheadline)
-                .foregroundStyle(SpectreColor.muted)
+                .foregroundStyle(QuisPulsatColor.muted)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(SpectreColor.card)
+        .background(QuisPulsatColor.card)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(SpectreColor.gold, lineWidth: 1.5)
+                .stroke(QuisPulsatColor.gold, lineWidth: 1.5)
         )
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .accessibilityElement(children: .combine)
@@ -380,7 +380,7 @@ private struct SensorWidget: View {
             focusable(
                 Text(widget.kind.displayName)
                     .font(compact ? .caption2.weight(.medium) : .headline)
-                    .foregroundStyle(compact ? SpectreColor.muted : SpectreColor.ink)
+                    .foregroundStyle(compact ? QuisPulsatColor.muted : QuisPulsatColor.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             )
@@ -391,7 +391,7 @@ private struct SensorWidget: View {
                 focusable(
                     Text(widget.caption)
                         .font(.caption.monospacedDigit())
-                        .foregroundStyle(SpectreColor.muted)
+                        .foregroundStyle(QuisPulsatColor.muted)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                 )
@@ -405,7 +405,7 @@ private struct SensorWidget: View {
         .frame(maxWidth: .infinity, minHeight: compact ? 108 : 320, alignment: .center)
         .padding(.horizontal, compact ? 4 : 16)
         .padding(.vertical, compact ? 8 : 16)
-        .background(SpectreColor.card)
+        .background(QuisPulsatColor.card)
         .clipShape(RoundedRectangle(cornerRadius: compact ? 12 : 20))
     }
 
@@ -419,7 +419,7 @@ private struct SensorWidget: View {
     }
 }
 
-private struct SpectreButtonStyle: ButtonStyle {
+private struct QuisPulsatButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
@@ -427,13 +427,13 @@ private struct SpectreButtonStyle: ButtonStyle {
             .font(.headline)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
-            .background(SpectreColor.gold.opacity(isEnabled ? (configuration.isPressed ? 0.75 : 1) : 0.35))
-            .foregroundStyle(SpectreColor.background)
+            .background(QuisPulsatColor.gold.opacity(isEnabled ? (configuration.isPressed ? 0.75 : 1) : 0.35))
+            .foregroundStyle(QuisPulsatColor.background)
             .clipShape(RoundedRectangle(cornerRadius: 14))
     }
 }
 
-enum SpectreColor {
+enum QuisPulsatColor {
     static let background = Color(red: 0.063, green: 0.078, blue: 0.106)
     static let card = Color(red: 0.102, green: 0.129, blue: 0.188)
     static let ink = Color(red: 0.957, green: 0.965, blue: 0.980)
@@ -445,9 +445,9 @@ enum SpectreColor {
 private extension SensorStatus {
     var tint: Color {
         switch self {
-        case .live: SpectreColor.gold
+        case .live: QuisPulsatColor.gold
         case .denied: Color(red: 0.878, green: 0.478, blue: 0.416)
-        case .unavailable, .notAsked: SpectreColor.muted
+        case .unavailable, .notAsked: QuisPulsatColor.muted
         }
     }
 }
