@@ -1,4 +1,4 @@
-# Spectre Implementation Plan
+# Quis Pulsat Implementation Plan
 
 This plan builds the investigation app described in [README.md](README.md) and [architecture.md](architecture.md). Each phase leaves a session the investigator can run on a phone. Later phases add leads. They do not replace the session, the clock, or the rule that each detector stays independent.
 
@@ -11,7 +11,7 @@ Out of the investigation loop for this plan: RF EMF, lux, room temperature, infr
 Create the iOS app and the object everything else hangs on: a foreground session with one clock.
 
 - ✅ SwiftUI app target, current iPhone OS, portrait, no background modes.
-- ✅ The investigator names a place and captures the current readings. The clock runs while Spectre is open. Sensors stay on screen the whole time.
+- ✅ The investigator names a place and captures the current readings. The clock runs while Quis Pulsat is open. Sensors stay on screen the whole time.
 - ✅ One monotonic clock. A capture stores elapsed time on that clock and the wall-clock time.
 - ✅ Permission copy for Motion, Location When In Use, Microphone, Camera, and Bluetooth, written as “recording this sensor for an investigation session.” Motion, the magnetometer, and the barometer start without a prompt. The other sensors ask only when that widget is tapped.
 - ✅ Every sensor is always visible. Live, unavailable, denied, and not-yet-asked are labeled on the widget. Denied says the lead is omitted. A denied widget opens Settings.

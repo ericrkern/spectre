@@ -31,7 +31,7 @@ struct SessionScreen: View {
                     .padding(20)
                 }
             }
-            .navigationTitle("Spectre")
+            .navigationTitle("Quis Pulsat")
             .navigationBarTitleDisplayMode(.inline)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .navigationDestination(isPresented: $showDetections) {
@@ -54,6 +54,17 @@ struct SessionScreen: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
+            Image("QuisPulsatMark")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 76, height: 76)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18)
+                        .stroke(SpectreColor.gold.opacity(0.55), lineWidth: 1)
+                )
+                .frame(maxWidth: .infinity, alignment: .center)
+                .accessibilityLabel("Quis Pulsat")
             TimelineView(.periodic(from: .now, by: 0.1)) { _ in
                 Text(controller.elapsedLabel(at: ContinuousClock().now))
                     .font(.system(size: 44, weight: .medium, design: .rounded))
@@ -61,7 +72,7 @@ struct SessionScreen: View {
                     .foregroundStyle(SpectreColor.gold)
                     .accessibilityIdentifier("session-clock")
             }
-            Text("Sensors stay live while Spectre is open. Capture saves what they show right now.")
+            Text("Sensors stay live while Quis Pulsat is open. Capture saves what they show right now.")
                 .font(.subheadline)
                 .foregroundStyle(SpectreColor.muted)
                 .fixedSize(horizontal: false, vertical: true)

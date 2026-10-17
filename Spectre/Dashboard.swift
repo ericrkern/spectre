@@ -366,6 +366,7 @@ final class DashboardController {
         detectionStore.save(detections)
         announced = saved[0]
         announcedCount = saved.count
+        tone.stir()
         alert.announce()
     }
 

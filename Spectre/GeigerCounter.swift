@@ -25,12 +25,12 @@ enum WidgetMetric {
     }
 }
 
-/// A high tone. A higher gauge reading is a higher pitch and a louder tone.
+/// A low, wavering voice. A higher reading is louder, faster, and more dissonant.
 enum WidgetTone {
-    static let lowPitch = 1_600.0
-    static let highPitch = 4_200.0
-    static let quiet = 0.02
-    static let loud = 0.9
+    static let lowPitch = 140.0
+    static let highPitch = 420.0
+    static let quiet = 0.0
+    static let loud = 0.75
 
     static func pitch(_ fraction: Double) -> Double {
         let level = min(max(fraction, 0), 1)
@@ -39,33 +39,79 @@ enum WidgetTone {
 
     static func volume(_ fraction: Double) -> Double {
         let level = min(max(fraction, 0), 1)
-        return quiet * pow(loud / quiet, level)
+        return loud * pow(level, 1.4)
     }
 
-    static func loop(frequency: Double) -> Data {
-        let rate = 44_100
-        let tone = min(max(frequency, 200), 8_000)
-        let samplesPerCycle = max(2, Int((Double(rate) / tone).rounded()))
-        let count = samplesPerCycle * 16
-        let actual = Double(rate) / Double(samplesPerCycle)
+    /// Two close tones, a thin upper voice, and a slow tremble. The buffer repeats cleanly.
+    static func loop(level: Double) -> Data {
+        let rate = 22_050
+        let seconds = 2
+        let count = rate * seconds
+        let activity = min(max(level, 0), 1)
+        let fundamental = max(80, pitch(activity).rounded())
+        let beat = 2 + (activity * 7).rounded()
+        let upper = max(fundamental + 40, (fundamental * (2.4 + activity * 0.9)).rounded())
+        let tremoloCycles = 1 + Int((activity * 2).rounded())
         var pcm = Data(capacity: count * 2)
         for index in 0..<count {
-            let theta = 2 * Double.pi * actual * Double(index) / Double(rate)
-            let sample = Int16((sin(theta) * 0.9 * Double(Int16.max)).rounded())
+            let time = Double(index) / Double(rate)
+            let moan = sin(2 * Double.pi * fundamental * time)
+            let shadow = sin(2 * Double.pi * (fundamental + beat) * time)
+            let air = sin(2 * Double.pi * upper * time)
+            let breathGate = sin(Double.pi * time / Double(seconds))
+            let breath = breathSample(index) * breathGate
+            let tremble = 0.62 + 0.38 * sin(2 * Double.pi * Double(tremoloCycles) * time / Double(seconds))
+            let body = moan * 0.52
+                + shadow * (0.16 + 0.38 * activity)
+                + air * (0.04 + 0.18 * activity)
+                + breath * (0.04 + 0.14 * activity)
+            let shaped = min(1, max(-1, body * tremble))
+            let sample = Int16((shaped * 0.9 * Double(Int16.max)).rounded())
             let bits = UInt16(bitPattern: sample)
             pcm.append(UInt8(truncatingIfNeeded: bits))
             pcm.append(UInt8(truncatingIfNeeded: bits >> 8))
         }
         return DetectionTone.header(sampleRate: rate, pcm: pcm) + pcm
     }
+
+    private static func breathSample(_ index: Int) -> Double {
+        var value = UInt32(truncatingIfNeeded: index &* 1_103_515_245 &+ 12_345)
+        value ^= value >> 16
+        return Double(value % 10_000) / 5_000 - 1
+    }
 }
 
-/// Plays the featured widget's tone and retargets pitch and loudness as its reading moves.
+/// Rises quickly when a reading or a detection arrives, then takes several seconds to fall quiet.
+struct ToneFade {
+    static let attackSeconds = 0.4
+    static let releaseSeconds = 8.0
+    var level = 0.0
+
+    mutating func advance(toward target: Double, seconds: Double) -> Double {
+        let goal = min(max(target, 0), 1)
+        let step = max(seconds, 0)
+        guard step > 0 else { return level }
+        let tau = goal >= level ? Self.attackSeconds : Self.releaseSeconds
+        let alpha = 1 - exp(-step / tau)
+        level += (goal - level) * alpha
+        if level < 0.0005 {
+            level = 0
+        }
+        return level
+    }
+
+    mutating func stir() {
+        level = 1
+    }
+}
+
+/// Plays the featured widget's voice. A detection opens it fully. Quiet readings let it fade.
 @MainActor
 final class WidgetTonePlayer {
     private var task: Task<Void, Never>?
     private var player: AVAudioPlayer?
-    private var preparedPitch = 0.0
+    private var preparedLevel = -1.0
+    private var fade = ToneFade()
     private var level: () -> Double? = { nil }
 
     func start(level: @escaping () -> Double?) {
@@ -79,10 +125,15 @@ final class WidgetTonePlayer {
         }
     }
 
+    func stir() {
+        fade.stir()
+    }
+
     func stop() {
         task?.cancel()
         task = nil
         level = { nil }
+        fade = ToneFade()
         silence()
     }
 
@@ -91,24 +142,24 @@ final class WidgetTonePlayer {
     }
 
     private func apply(_ fraction: Double?) {
-        guard let fraction else {
+        let heard = fade.advance(toward: fraction ?? 0, seconds: 0.04)
+        guard heard >= 0.02 else {
             silence()
             return
         }
-        let pitch = WidgetTone.pitch(fraction)
-        let volume = Float(WidgetTone.volume(fraction))
+        let volume = Float(WidgetTone.volume(heard))
         prepareSession()
-        let pitchChanged = player == nil || abs(preparedPitch - pitch) / max(pitch, 1) > 0.03
-        if pitchChanged {
+        let timbreChanged = player == nil || abs(preparedLevel - heard) > 0.08
+        if timbreChanged {
             player?.stop()
-            player = try? AVAudioPlayer(data: WidgetTone.loop(frequency: pitch))
+            player = try? AVAudioPlayer(data: WidgetTone.loop(level: heard))
             player?.numberOfLoops = -1
             player?.prepareToPlay()
             player?.volume = volume
-            preparedPitch = pitch
+            preparedLevel = heard
             if player?.play() != true {
                 player = nil
-                preparedPitch = 0
+                preparedLevel = -1
             }
         } else {
             player?.volume = volume
@@ -118,7 +169,7 @@ final class WidgetTonePlayer {
     private func silence() {
         player?.stop()
         player = nil
-        preparedPitch = 0
+        preparedLevel = -1
     }
 
     private func prepareSession() {

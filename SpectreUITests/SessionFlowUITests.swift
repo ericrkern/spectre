@@ -34,7 +34,7 @@ final class SessionFlowUITests: XCTestCase {
                 || leads.label.contains("Learning the room")
                 || leads.label.contains("Watching for magnetic")
         )
-        app.navigationBars.buttons["Spectre"].tap()
+        app.navigationBars.buttons["Quis Pulsat"].tap()
 
         let clock = app.staticTexts["session-clock"]
         XCTAssertTrue(clock.waitForExistence(timeout: 2))

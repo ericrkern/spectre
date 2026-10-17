@@ -293,7 +293,7 @@ struct InvestigationDetectors: Equatable {
 
     private var cooldownUntil: [String: TimeInterval] = [:]
 
-    static let waitingText = "Set the phone down. Spectre learns the room once it is still."
+    static let waitingText = "Set the phone down. Quis Pulsat learns the room once it is still."
     static let learningText = "Learning the room."
     static let watchingText = "Watching for magnetic, pressure, and motion leads."
 

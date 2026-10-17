@@ -47,7 +47,30 @@ import Testing
     let highVolume = WidgetTone.volume(0.8)
     #expect(highPitch > WidgetTone.pitch(0.2))
     #expect(highVolume > WidgetTone.volume(0.2))
+    #expect(WidgetTone.volume(0) == 0)
     #expect(WidgetMetric.level(SensorWidgetState(kind: .nearby, status: .live, value: "4 nearby", reading: 4)) == 0.5)
+}
+
+@Test func aDetectionStaysAudibleThenFadesAfterTheRoomGoesQuiet() {
+    var fade = ToneFade()
+    fade.stir()
+    let justAfter = fade.advance(toward: 0, seconds: 0.5)
+    #expect(justAfter > 0.9)
+    let eightSecondsLater = fade.advance(toward: 0, seconds: ToneFade.releaseSeconds)
+    #expect(eightSecondsLater < justAfter)
+    #expect(eightSecondsLater > 0.2)
+    for _ in 0..<6 {
+        _ = fade.advance(toward: 0, seconds: ToneFade.releaseSeconds)
+    }
+    #expect(fade.level < 0.05)
+
+    var rising = ToneFade()
+    let attacked = rising.advance(toward: 1, seconds: ToneFade.attackSeconds)
+    var falling = ToneFade()
+    falling.stir()
+    let released = falling.advance(toward: 0, seconds: ToneFade.attackSeconds)
+    #expect(attacked > 0.5)
+    #expect(released > 0.9)
 }
 
 @Test func dialScalesPlaceTheNeedleOnTheReading() {

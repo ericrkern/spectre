@@ -2,7 +2,7 @@ import AudioToolbox
 import AVFoundation
 import UIKit
 
-/// Signals a saved detection with a haptic. The featured widget's tone follows its reading.
+/// Signals a saved detection with a haptic. The featured widget's voice swells, then fades as the room goes quiet.
 @MainActor
 final class ToneDetectionAlert: DetectionAlerting {
     private var player: AVAudioPlayer?
