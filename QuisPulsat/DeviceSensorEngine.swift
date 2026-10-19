@@ -800,7 +800,9 @@ private final class AudioLevelFeed {
     private let onLevel: @MainActor (Double) -> Void
     private let onWindow: @MainActor (Double, [Float]) -> Void
     private let engine = AVAudioEngine()
+    private let sessionQueue = DispatchQueue(label: "quispulsat.microphone")
     private var started = false
+    private var captureGeneration = 0
     private var pending: [Float] = []
 
     init(
@@ -815,7 +817,7 @@ private final class AudioLevelFeed {
         let current = AVAudioApplication.shared.recordPermission
         if current == .granted {
             Task { @MainActor in permission(true) }
-            begin()
+            sessionQueue.async { self.begin() }
             return
         }
         guard request, current == .undetermined else {
@@ -827,29 +829,71 @@ private final class AudioLevelFeed {
         AVAudioApplication.requestRecordPermission { granted in
             Task { @MainActor in
                 permission(granted)
-                if granted { self.begin() }
+            }
+            if granted {
+                self.sessionQueue.async { self.begin() }
             }
         }
     }
 
     func stop() {
-        guard started else { return }
-        engine.inputNode.removeTap(onBus: 0)
-        engine.stop()
-        started = false
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        sessionQueue.async {
+            self.captureGeneration += 1
+            guard self.started else { return }
+            self.engine.inputNode.removeTap(onBus: 0)
+            self.engine.stop()
+            self.started = false
+            let session = AVAudioSession.sharedInstance()
+            if #available(iOS 27.0, *) {
+                session.deactivate(options: .notifyOthersOnDeactivation) { _, _ in }
+            } else {
+                try? session.setActive(false, options: .notifyOthersOnDeactivation)
+            }
+        }
     }
 
     private func begin() {
         guard !started else { return }
+        captureGeneration += 1
+        let generation = captureGeneration
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setCategory(.playAndRecord, mode: .measurement, options: [.defaultToSpeaker, .mixWithOthers])
             try session.setPreferredSampleRate(48_000)
-            try session.setActive(true)
         } catch {
             return
         }
+        let startAfterActivation: (Bool) -> Void = { [weak self] activated in
+            self?.sessionQueue.async {
+                guard let self else { return }
+                guard activated, generation == self.captureGeneration else {
+                    if activated {
+                        if #available(iOS 27.0, *) {
+                            session.deactivate(options: .notifyOthersOnDeactivation) { _, _ in }
+                        } else {
+                            try? session.setActive(false, options: .notifyOthersOnDeactivation)
+                        }
+                    }
+                    return
+                }
+                self.startEngine()
+            }
+        }
+        if #available(iOS 27.0, *) {
+            session.activate(options: []) { activated, _ in
+                startAfterActivation(activated)
+            }
+        } else {
+            do {
+                try session.setActive(true)
+            } catch {
+                return
+            }
+            startAfterActivation(true)
+        }
+    }
+
+    private func startEngine() {
         let input = engine.inputNode
         let format = input.outputFormat(forBus: 0)
         guard format.sampleRate > 0, format.channelCount > 0 else { return }

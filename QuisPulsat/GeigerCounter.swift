@@ -113,6 +113,8 @@ final class WidgetTonePlayer {
     private var preparedLevel = -1.0
     private var fade = ToneFade()
     private var level: () -> Double? = { nil }
+    private var sessionReady = false
+    private var activating = false
 
     func start(level: @escaping () -> Double?) {
         self.level = level
@@ -134,6 +136,7 @@ final class WidgetTonePlayer {
         task = nil
         level = { nil }
         fade = ToneFade()
+        activating = false
         silence()
     }
 
@@ -148,13 +151,12 @@ final class WidgetTonePlayer {
             return
         }
         let volume = Float(WidgetTone.volume(heard))
-        prepareSession()
+        guard ensureSession() else { return }
         let timbreChanged = player == nil || abs(preparedLevel - heard) > 0.08
         if timbreChanged {
             player?.stop()
             player = try? AVAudioPlayer(data: WidgetTone.loop(level: heard))
             player?.numberOfLoops = -1
-            player?.prepareToPlay()
             player?.volume = volume
             preparedLevel = heard
             if player?.play() != true {
@@ -172,13 +174,33 @@ final class WidgetTonePlayer {
         preparedLevel = -1
     }
 
-    private func prepareSession() {
+    /// Returns once the session is already active. Activation itself stays off the main thread.
+    private func ensureSession() -> Bool {
         let session = AVAudioSession.sharedInstance()
         if session.category == .record {
             try? session.setCategory(.playAndRecord, mode: .measurement, options: [.defaultToSpeaker, .mixWithOthers])
         } else if session.category != .playback && session.category != .playAndRecord {
             try? session.setCategory(.playback, options: [.mixWithOthers])
-            try? session.setActive(true)
         }
+        if sessionReady { return true }
+        guard !activating else { return false }
+        activating = true
+        let finished: @Sendable (Bool) -> Void = { [weak self] activated in
+            Task { @MainActor in
+                self?.activating = false
+                self?.sessionReady = activated
+            }
+        }
+        if #available(iOS 27.0, *) {
+            session.activate(options: []) { activated, _ in
+                finished(activated)
+            }
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                let activated = (try? session.setActive(true)) != nil
+                finished(activated)
+            }
+        }
+        return false
     }
 }

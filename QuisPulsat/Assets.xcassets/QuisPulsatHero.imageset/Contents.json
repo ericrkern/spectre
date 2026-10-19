@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "quis-pulsat-hero.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

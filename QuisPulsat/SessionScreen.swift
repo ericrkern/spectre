@@ -54,17 +54,11 @@ struct SessionScreen: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image("QuisPulsatMark")
+            Image("QuisPulsatHero")
                 .resizable()
-                .scaledToFill()
-                .frame(width: 76, height: 76)
+                .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 18))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 18)
-                        .stroke(QuisPulsatColor.gold.opacity(0.55), lineWidth: 1)
-                )
-                .frame(maxWidth: .infinity, alignment: .center)
-                .accessibilityLabel("Quis Pulsat")
+                .accessibilityLabel("Quis Pulsat. Something's knocking. Dare to answer?")
             TimelineView(.periodic(from: .now, by: 0.1)) { _ in
                 Text(controller.elapsedLabel(at: ContinuousClock().now))
                     .font(.system(size: 44, weight: .medium, design: .rounded))
@@ -76,6 +70,11 @@ struct SessionScreen: View {
                 .font(.subheadline)
                 .foregroundStyle(QuisPulsatColor.muted)
                 .fixedSize(horizontal: false, vertical: true)
+            Image("QuisPulsatHowItWorks")
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+                .accessibilityLabel("Set the phone down, learn the room, then keep each lead on its own.")
             HStack(alignment: .center, spacing: 16) {
                 VStack(spacing: 4) {
                     Text("Sensitivity")

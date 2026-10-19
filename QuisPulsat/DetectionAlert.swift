@@ -17,16 +17,30 @@ final class ToneDetectionAlert: DetectionAlerting {
             try? session.setCategory(.playAndRecord, mode: .measurement, options: [.defaultToSpeaker, .mixWithOthers])
         } else if session.category != .playback && session.category != .playAndRecord {
             try? session.setCategory(.playback, options: [.mixWithOthers])
-            try? session.setActive(true)
         }
-        guard let player = try? AVAudioPlayer(data: data) else {
-            AudioServicesPlayAlertSound(1005)
-            return
+        let begin: @Sendable () -> Void = { [weak self] in
+            Task { @MainActor in
+                guard let self else { return }
+                guard let player = try? AVAudioPlayer(data: data) else {
+                    AudioServicesPlayAlertSound(1005)
+                    return
+                }
+                self.player = player
+                if !player.play() {
+                    AudioServicesPlayAlertSound(1005)
+                }
+            }
         }
-        player.prepareToPlay()
-        self.player = player
-        if !player.play() {
-            AudioServicesPlayAlertSound(1005)
+        if #available(iOS 27.0, *) {
+            session.activate(options: []) { activated, _ in
+                if activated { begin() }
+            }
+        } else {
+            DispatchQueue.global(qos: .userInitiated).async {
+                if (try? session.setActive(true)) != nil {
+                    begin()
+                }
+            }
         }
     }
 }
